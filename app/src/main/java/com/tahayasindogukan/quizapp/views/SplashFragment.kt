@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.tahayasindogukan.quizapp.R
+import dagger.hilt.android.AndroidEntryPoint
 
 class SplashFragment : Fragment() {
     private lateinit var navController: NavController

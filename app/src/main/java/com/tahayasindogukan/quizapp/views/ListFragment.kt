@@ -13,13 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tahayasindogukan.quizapp.adapter.QuizListAdapter
 import com.tahayasindogukan.quizapp.entity.Quiz
 import com.tahayasindogukan.quizapp.viewmodel.QuizListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 class ListFragment : Fragment() {
-
-
     private lateinit var binding: FragmentListBinding
     private lateinit var adapter:QuizListAdapter
     private lateinit var quizListViewModel: QuizListViewModel
@@ -34,13 +32,7 @@ class ListFragment : Fragment() {
         binding= FragmentListBinding.inflate(inflater,container,false)
 
         binding.listQuizRecyclerView.layoutManager=LinearLayoutManager(requireContext())
-
-
-
-            quizListViewModel.getData()
-
-
-
+        quizListViewModel.getData()
         quizListViewModel.quizListesi.observe(viewLifecycleOwner){data->
 
              adapter=QuizListAdapter(data)
@@ -48,15 +40,6 @@ class ListFragment : Fragment() {
             Log.e("fragment", data.toString())
 
         }
-
-
-
         return binding.root
-
     }
-
-
-
 }
-
-

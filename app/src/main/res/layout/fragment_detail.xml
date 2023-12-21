@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.DetailFragment"
-    android:background="@color/purple">
+    android:background="@color/yellow">
 
     <ImageView
         android:id="@+id/detailFragmentImage"

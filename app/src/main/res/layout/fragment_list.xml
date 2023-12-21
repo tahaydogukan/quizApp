@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
+    android:background="@color/dark_green"
     tools:context=".views.ListFragment">
 
 
@@ -12,10 +12,10 @@
         android:id="@+id/textViewList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Quiz"
-        android:textColor="@color/white"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="16dp"
+        android:text="QUIZES"
+        android:textColor="@color/bright_green"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +25,7 @@
         android:id="@+id/listQuizRecyclerView"
         android:layout_width="409dp"
         android:layout_height="593dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewList" />

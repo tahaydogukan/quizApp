@@ -25,8 +25,9 @@ class AuthViewModel():ViewModel() {
                 // Kayıt başarılı, ek işlemleri yapabilirsiniz.
                 val user = auth.getCurrentUserRepository()
                 // User nesnesini kullanabilir veya UI'yi güncelleyebilirsiniz.
-            //else {
-                // Kayıt başarısız, kullanıcıya hata mesajı gösterilebilir.
+            /*else {
+               Kayıt başarısız, kullanıcıya hata mesajı gösterilebilir.
+            }    */
         }
     }
 
@@ -35,6 +36,7 @@ class AuthViewModel():ViewModel() {
                 onComplete(success, message)
         }
     }
+
     fun currentUserViewModel():FirebaseUser?{
         return auth.getCurrentUserRepository()
     }

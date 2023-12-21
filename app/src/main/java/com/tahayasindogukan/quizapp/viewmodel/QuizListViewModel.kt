@@ -11,15 +11,9 @@ class QuizListViewModel():ViewModel(){
     var quizListesi=MutableLiveData<List<Quiz>>()
 
     val repo=QuizListRepository{ quizList ->
-        // Handle the quizList here, e.g., update UI or perform further processing
         quizListesi.postValue(quizList)
         Log.e("viewmodle repo", quizList.toString())
-
     }
-
-
-
-
     fun getData() {
         quizListesi.postValue(repo.getQuizData())
         Log.e("getdata function",quizListesi.toString())

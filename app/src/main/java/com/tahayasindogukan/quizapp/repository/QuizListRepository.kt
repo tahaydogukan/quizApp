@@ -9,7 +9,6 @@ class QuizListRepository(private val callback: (List<Quiz>) -> Unit) {
     private val firestore = FirebaseFirestore.getInstance()
     var quizList= ArrayList<Quiz>()
 
-
     fun getQuizData():ArrayList<Quiz>{
       firestore.collection("Quiz")
             .get()
@@ -17,12 +16,9 @@ class QuizListRepository(private val callback: (List<Quiz>) -> Unit) {
                 for (d in documents) {
                     Log.d("for", "${d}")
                     var quiz=d.toObject(Quiz::class.java)
-
                         quiz.quizId=d.id
                         quizList.add(quiz)
-
                 }
-                Log.e("repo", quizList.toString())
                 callback(quizList)
             }
             .addOnFailureListener { exception ->
@@ -32,7 +28,4 @@ class QuizListRepository(private val callback: (List<Quiz>) -> Unit) {
         Log.e("repo",quizList.toString())
       return quizList
     }
-
-
-
 }

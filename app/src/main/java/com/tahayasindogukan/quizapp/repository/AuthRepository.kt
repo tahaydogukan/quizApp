@@ -1,16 +1,7 @@
 package com.tahayasindogukan.quizapp.repository
 
-import android.app.Application
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.firestore
-import com.tahayasindogukan.quizapp.MainActivity
-import com.tahayasindogukan.quizapp.R
-import com.tahayasindogukan.quizapp.entity.User
 
 
 class AuthRepository {

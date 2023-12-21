@@ -1,5 +1,6 @@
 package com.tahayasindogukan.quizapp.views
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.tahayasindogukan.quizapp.R
+import com.tahayasindogukan.quizapp.activities.HomeActivity
 import com.tahayasindogukan.quizapp.databinding.FragmentSignInBinding
 import com.tahayasindogukan.quizapp.viewmodel.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 class SignInFragment : Fragment() {
 
@@ -44,7 +47,7 @@ class SignInFragment : Fragment() {
                     // Giriş başarılı, ek işlemleri yapabilirsiniz.
                     val user = viewModel.currentUserViewModel()
                     // User nesnesini kullanabilir veya UI'yi güncelleyebilirsiniz.
-                    navController.navigate(R.id.action_signInFragment_to_listFragment)
+                    startActivity(Intent(requireContext(),HomeActivity::class.java))
                 } else {
                     // Giriş başarısız, kullanıcıya hata mesajı gösterilebilir.
                     Toast.makeText(requireContext(), "Giriş başarısız: $message", Toast.LENGTH_SHORT).show()

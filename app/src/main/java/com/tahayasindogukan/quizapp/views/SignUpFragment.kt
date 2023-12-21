@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.tahayasindogukan.quizapp.R
 import com.tahayasindogukan.quizapp.databinding.FragmentSignUpBinding
 import com.tahayasindogukan.quizapp.viewmodel.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 class SignUpFragment : Fragment() {
 

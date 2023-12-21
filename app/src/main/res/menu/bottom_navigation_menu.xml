@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/quizFragment"
+        android:icon="@drawable/bottom_navigation_question_image"
+        android:title="Quiz" />
+    <item
+        android:id="@+id/savedWordsFragment"
+        android:icon="@drawable/bottom_navigation_saved_words_image"
+        android:title="Saved Words" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/bottom_navigation_settings_image"
+        android:title="Settings" />
+</menu>
