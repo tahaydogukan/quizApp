@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import com.tahayasindogukan.quizapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-
 class MainActivity() : AppCompatActivity() {
 
 

@@ -1,21 +1,16 @@
 package com.tahayasindogukan.quizapp.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.tahayasindogukan.quizapp.entity.SavedWords
-import com.tahayasindogukan.quizapp.entity.Word
-import com.tahayasindogukan.quizapp.repository.WordRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class WordViewModel @Inject constructor(var wordRepo:WordRepository): ViewModel() {
-    var indeksList:MutableList<Int> = mutableListOf()
-    var wordList=MutableLiveData<List<SavedWords>>()
+import androidx.lifecycle.ViewModel
+import com.tahayasindogukan.quizapp.entity.Word
+
+
+class WordViewModel():ViewModel() {
+
+
+
+
+
 
     //data sourceda işlem yapılıyor sonra repoda çalıştırılıyor
     //viewmodelden de repodaki o fonksiyon kullanılıyor
@@ -24,9 +19,7 @@ class WordViewModel @Inject constructor(var wordRepo:WordRepository): ViewModel(
 
 
 
-    init {
-        uploadWords()
-    }
+
 
 
     fun getQuestionsList(i:Int):List<Word>{
@@ -118,11 +111,5 @@ class WordViewModel @Inject constructor(var wordRepo:WordRepository): ViewModel(
         }
         return emptyList()
     }
-    fun uploadWords(){
-        //Main arayüz işlemlelerinde IO veritabanı kısmında kullanılıyor
-        CoroutineScope(Dispatchers.Main).launch {
-            wordList.value=wordRepo.getWords()
-            Log.e("ViewModel",wordList.toString())
-        }
-    }
+
 }

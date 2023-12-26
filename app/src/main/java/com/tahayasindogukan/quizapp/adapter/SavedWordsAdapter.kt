@@ -1,5 +1,6 @@
 package com.tahayasindogukan.quizapp.adapter
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,13 +22,12 @@ RecyclerView.Adapter<SavedWordsAdapter.SavedWordsViewHolder>() {
     override fun getItemCount(): Int {
         return savedWordsList.size
     }
-
+    //holder sayesinde card tasarımına ulaşıyoruz
     override fun onBindViewHolder(holder: SavedWordsViewHolder, position: Int) {
         val savedWords= savedWordsList[position]
         val t=holder.view
-
-        t.savedWordsEnglish.text=savedWords.english_word
-        t.savedWordsTurkish.text=savedWords.turkish_word
+        t.savedWordsEnglish.text = savedWords.english_word
+        t.savedWordsTurkish.text = savedWords.turkish_word
     }
 
 

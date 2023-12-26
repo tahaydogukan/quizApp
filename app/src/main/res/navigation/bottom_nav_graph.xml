@@ -6,39 +6,18 @@
     app:startDestination="@id/quizFragment">
 
     <fragment
-        android:id="@+id/quizFragment"
-        android:name="com.tahayasindogukan.quizapp.bottomNavFragments.QuizFragment"
-        android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" >
-        <action
-            android:id="@+id/action_quizFragment_to_savedWordsFragment"
-            app:destination="@id/savedWordsFragment" />
-        <action
-            android:id="@+id/action_quizFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/savedWordsFragment"
         android:name="com.tahayasindogukan.quizapp.bottomNavFragments.SavedWordsFragment"
         android:label="fragment_saved_words"
-        tools:layout="@layout/fragment_saved_words" >
-        <action
-            android:id="@+id/action_savedWordsFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_savedWordsFragment_to_quizFragment"
-            app:destination="@id/quizFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_saved_words" />
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.tahayasindogukan.quizapp.bottomNavFragments.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.tahayasindogukan.quizapp.bottomNavFragments.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_settingsFragment_to_quizFragment"
-            app:destination="@id/quizFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_savedWordsFragment"
-            app:destination="@id/savedWordsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -12,8 +12,8 @@ import androidx.fragment.app.viewModels
 import com.tahayasindogukan.quizapp.databinding.FragmentQuizBinding
 import com.tahayasindogukan.quizapp.entity.Word
 import com.tahayasindogukan.quizapp.viewmodel.WordViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
-
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
     private lateinit var wordViewModel:WordViewModel
