@@ -1,7 +1,10 @@
 package com.tahayasindogukan.quizapp.repository
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.tahayasindogukan.quizapp.entity.User
 
 
 class AuthRepository {
@@ -46,6 +49,8 @@ class AuthRepository {
     fun isUserLoggedInRepository(): Boolean {
         return auth.currentUser != null
     }
+
+    
 }
 
 

@@ -9,19 +9,17 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.tahayasindogukan.quizapp.databinding.FragmentQuizBinding
 import com.tahayasindogukan.quizapp.entity.SavedWords
 import com.tahayasindogukan.quizapp.entity.Word
 import com.tahayasindogukan.quizapp.viewmodel.SavedWordsViewModel
 import com.tahayasindogukan.quizapp.viewmodel.WordViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
     private lateinit var wordViewModel:WordViewModel
     private lateinit var savedWordViewModel: SavedWordsViewModel
+
     var indeks:Int?=null
     var questionListIndeks:Int=1
     var correctTranslation:String?=null
@@ -34,6 +32,8 @@ class QuizFragment : Fragment() {
 
         val tempViewModel2:SavedWordsViewModel by viewModels()
         savedWordViewModel=tempViewModel2
+
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,10 +60,11 @@ class QuizFragment : Fragment() {
 
 
 
-
         }
         return binding.root
     }
+
+
 
     private fun insertDataToDatabase() {
 

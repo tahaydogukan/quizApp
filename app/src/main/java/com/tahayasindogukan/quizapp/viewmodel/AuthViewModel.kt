@@ -15,6 +15,9 @@ class AuthViewModel():ViewModel() {
 
     val auth=AuthRepository()
 
+
+
+
     fun signUpViewModel(email:String,password: String, onComplete: (Boolean, String?) -> Unit){
         auth.signUpRepository(email,password){
                 success, message ->
