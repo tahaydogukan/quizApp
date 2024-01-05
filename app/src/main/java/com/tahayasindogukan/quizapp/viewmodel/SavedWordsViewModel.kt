@@ -3,11 +3,11 @@ package com.tahayasindogukan.quizapp.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tahayasindogukan.quizapp.datasource.WordDatabase
 import com.tahayasindogukan.quizapp.datasource.WordRepository
 import com.tahayasindogukan.quizapp.entity.SavedWords
-import com.tahayasindogukan.quizapp.entity.Word
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -15,6 +15,12 @@ class SavedWordsViewModel(application: Application):AndroidViewModel(application
 
     val  readAllData:LiveData<List<SavedWords>>
     private val repository: WordRepository
+    private var _count = MutableLiveData<Int>()
+    val count: LiveData<Int>
+        get() = _count
+
+
+
     init {
 
         val wordDao= WordDatabase.getDatabase(application).wordDao()
@@ -34,4 +40,11 @@ class SavedWordsViewModel(application: Application):AndroidViewModel(application
             repository.deleteWord(word)
         }
     }
+
+   fun findWord(word: String){
+        viewModelScope.launch {
+            _count.value = repository.findWord(word)
+        }
+    }
+
 }

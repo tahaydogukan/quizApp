@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.tahayasindogukan.quizapp.databinding.FragmentQuizBinding
 import com.tahayasindogukan.quizapp.entity.SavedWords
 import com.tahayasindogukan.quizapp.entity.Word
@@ -73,8 +74,17 @@ class QuizFragment : Fragment() {
         val turkish_word = correctTranslation
 
         val word = SavedWords(0, english_word!!, turkish_word!!)
+        savedWordViewModel.findWord(turkish_word)
+        savedWordViewModel.count.observe(viewLifecycleOwner) { data ->
 
-        savedWordViewModel.addWord(word)
+            if (data == 0) {
+                savedWordViewModel.addWord(word)
+            } else {
+                showToast("Bu kelime zaten kayıtlı.")
+            }
+
+        }
+
     }
 
     fun updtateQuestionList(i: Int) {

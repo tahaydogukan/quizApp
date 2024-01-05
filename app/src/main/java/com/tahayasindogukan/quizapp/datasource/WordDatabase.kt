@@ -29,5 +29,7 @@ abstract class WordDatabase: RoomDatabase() {
                     return instance
                 }
             }
+
+
     }
 }

@@ -14,4 +14,8 @@ class WordRepository(private val wordDao:WordDao) {
     suspend fun deleteWord(savedWords: SavedWords){
         wordDao.deleteWord(savedWords)
     }
+
+    suspend fun findWord(word: String):Int {
+        return wordDao.findWord(word)
+    }
 }

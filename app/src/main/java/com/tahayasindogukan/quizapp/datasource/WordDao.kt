@@ -19,4 +19,7 @@ interface WordDao {
     @Delete
     suspend fun deleteWord(savedWords: SavedWords)
 
+    @Query("SELECT COUNT(*) FROM savedWords WHERE turkish_word = :word")
+    suspend fun findWord(word: String): Int
+
 }
