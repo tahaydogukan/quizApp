@@ -69,7 +69,6 @@ class QuizFragment : Fragment() {
 
     private fun insertDataToDatabase() {
 
-
         val english_word = randomWord?.question_word
         val turkish_word = correctTranslation
 

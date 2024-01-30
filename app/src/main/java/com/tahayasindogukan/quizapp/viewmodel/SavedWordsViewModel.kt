@@ -15,9 +15,7 @@ class SavedWordsViewModel(application: Application):AndroidViewModel(application
 
     val  readAllData:LiveData<List<SavedWords>>
     private val repository: WordRepository
-    private var _count = MutableLiveData<Int>()
-    val count: LiveData<Int>
-        get() = _count
+    var count = MutableLiveData<Int>()
 
 
 
@@ -43,7 +41,7 @@ class SavedWordsViewModel(application: Application):AndroidViewModel(application
 
    fun findWord(word: String){
         viewModelScope.launch {
-            _count.value = repository.findWord(word)
+            count.value = repository.findWord(word)
         }
     }
 
