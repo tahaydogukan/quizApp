@@ -6,4 +6,7 @@
     <color name="light_sky">#59CFFA</color>
     <color name="bright_green">#A676FF03</color>
     <color name="dark_green">#a4c639</color>
+    <color name="signIn_Background">#336699</color>
+    <color name="signUp_Background">#336699</color>
+    <color name="red">#D50000</color>
 </resources>

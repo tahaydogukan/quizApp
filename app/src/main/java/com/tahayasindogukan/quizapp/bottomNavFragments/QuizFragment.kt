@@ -9,40 +9,59 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.tahayasindogukan.quizapp.databinding.FragmentQuizBinding
+import com.tahayasindogukan.quizapp.entity.QuestionWord
 import com.tahayasindogukan.quizapp.entity.SavedWords
-import com.tahayasindogukan.quizapp.entity.Word
+import com.tahayasindogukan.quizapp.viewmodel.QuestionWordsViewModel
 import com.tahayasindogukan.quizapp.viewmodel.SavedWordsViewModel
-import com.tahayasindogukan.quizapp.viewmodel.WordViewModel
 import kotlin.random.Random
+
 class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
-    private lateinit var wordViewModel:WordViewModel
+    private lateinit var questionWordsViewModel: QuestionWordsViewModel
     private lateinit var savedWordViewModel: SavedWordsViewModel
 
     var indeks:Int?=null
-    var questionListIndeks:Int=1
+    //var questionListIndeks:Int=1
     var correctTranslation:String?=null
-    var randomWord:Word?=null
+    var randomQuestionWord:QuestionWord?=null
+    var questionWordsList:MutableList<QuestionWord> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tempViewModel:WordViewModel by viewModels()
-        wordViewModel=tempViewModel
+        val tempViewModel: QuestionWordsViewModel by viewModels()
+        questionWordsViewModel = tempViewModel
 
-        val tempViewModel2:SavedWordsViewModel by viewModels()
-        savedWordViewModel=tempViewModel2
+        val tempViewModel2: SavedWordsViewModel by viewModels()
+        savedWordViewModel = tempViewModel2
 
 
     }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding= FragmentQuizBinding.inflate(inflater,container,false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentQuizBinding.inflate(inflater, container, false)
 
-        updtateQuestionList(1)
+        questionWordsViewModel.getQuestion()
 
-        binding.apply {
+        questionWordsViewModel.question.observe(viewLifecycleOwner){data->
+            uploadQuestions(data as MutableList)
+            questionWordsList=data
+        }
+        Log.e("fragmentWordList",questionWordsList.toString())
+        binding.saveWord.setOnClickListener {
+            insertDataToDatabase()
+        }
+        //uploadQuestions(questionWordsList)
+
+        //var a =questionWordsViewModel.question
+        //Log.e("fragment",a.toString())
+        //updateQuestionList(1)
+
+
+        /* binding.apply {
 
             easyButton.setOnClickListener{
                 updtateQuestionList(1)
@@ -61,15 +80,14 @@ class QuizFragment : Fragment() {
 
 
 
-        }
+        }*/
         return binding.root
     }
 
 
+  private fun insertDataToDatabase() {
 
-    private fun insertDataToDatabase() {
-
-        val english_word = randomWord?.question_word
+        val english_word = randomQuestionWord?.englishWord
         val turkish_word = correctTranslation
 
         val word = SavedWords(0, english_word!!, turkish_word!!)
@@ -83,10 +101,8 @@ class QuizFragment : Fragment() {
             }
 
         }
-
     }
-
-    fun updtateQuestionList(i: Int) {
+    /*fun updateQuestionList(i: Int) {
         when(i) {
             1->{var wordList=wordViewModel.getQuestionsList(1)
                 uploadQuestions(wordList)
@@ -98,47 +114,36 @@ class QuizFragment : Fragment() {
                 uploadQuestions(wordList2)
                 questionListIndeks=3}
         }
+    }*/
+
+    fun getQuestion(){
+        questionWordsViewModel.getQuestion()
+        var question = questionWordsViewModel.question
+
+        //binding.textViewQuestion.text=question[1].englishWord.toString()
+
+        Log.e("fragment",question.toString())
+
     }
 
-    private fun uploadQuestions(wordList:List<Word>){
+    private fun uploadQuestions(questionWordsList: MutableList<QuestionWord>) {
+        indeks = Random.nextInt(questionWordsList.size)
+        randomQuestionWord = questionWordsList[indeks!!]
+        correctTranslation = randomQuestionWord!!.turkishWord
+        binding.textViewQuestion.text = randomQuestionWord!!.englishWord
 
-        var randomIndex= Random.nextInt(wordList.size)
-        indeks=randomIndex
-        Log.e("ındeks numarası",indeks.toString())
+        val buttonOptions = listOf(binding.option1Btn, binding.option2Btn, binding.option3Btn)
+        buttonOptions.shuffled()  // Rasgele sıralama
 
-        randomWord=wordList[randomIndex]
+        buttonOptions[0].text = randomQuestionWord!!.turkishWord  // Doğru cevap ilk butona
+        buttonOptions[1].text = questionWordsList.random().turkishWord  // Rastgele yanlış cevap
+        buttonOptions[2].text = questionWordsList.random().turkishWord  // Rastgele yanlış cevap
 
-        correctTranslation = randomWord!!.answer_word
-
-        binding.textViewQuestion.text= randomWord!!.question_word
-
-        var correctButtonIndex=(0..2).random()
-        when(correctButtonIndex){
-            0->binding.option1Btn.text=correctTranslation
-            1->binding.option2Btn.text=correctTranslation
-            2->binding.option3Btn.text=correctTranslation
+        buttonOptions.forEach { button ->
+            button.setOnClickListener { checkAnswer(button, randomQuestionWord!!.turkishWord) }
         }
-
-        if (correctButtonIndex==0){
-           // val (falseButton1,falseButton2)=List(2){ Random.nextInt(1,3)}
-            binding.option2Btn.text= randomWord!!.wrong_opsion1
-            binding.option3Btn.text= randomWord!!.wrong_opsion2
-        }else if(correctButtonIndex==1){
-           // val falseButton1=0
-           // val falseButton2=2
-            binding.option1Btn.text= randomWord!!.wrong_opsion1
-            binding.option3Btn.text= randomWord!!.wrong_opsion2
-        }else if(correctButtonIndex==2){
-           // val (falseButton1,falseButton2)=List(2){ Random.nextInt(0,2)}
-            binding.option1Btn.text= randomWord!!.wrong_opsion1
-            binding.option2Btn.text= randomWord!!.wrong_opsion2
-        }
-
-        binding.option1Btn.setOnClickListener{checkAnswer(binding.option1Btn, correctTranslation!!)}
-        binding.option2Btn.setOnClickListener{checkAnswer(binding.option2Btn, correctTranslation!!)}
-        binding.option3Btn.setOnClickListener{checkAnswer(binding.option3Btn, correctTranslation!!)}
     }
-    private fun checkAnswer(button: Button,correctTranslation:String) {
+    private fun checkAnswer(button: Button, correctTranslation:String) {
         val userAnswer = button.text.toString()
         if (userAnswer == correctTranslation) {
             showToast("Doğru! Tebrikler.")
@@ -147,12 +152,12 @@ class QuizFragment : Fragment() {
             showToast("Yanlış. Doğru cevap: $correctTranslation")
 
         }
-        uploadQuestions(wordViewModel.getQuestionsList(questionListIndeks))
+        questionWordsViewModel.getQuestion()
+        //uploadQuestions(questionWordsList)
     }
-    private fun showToast(message: String) {
+     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+}
 
-
-    }
 

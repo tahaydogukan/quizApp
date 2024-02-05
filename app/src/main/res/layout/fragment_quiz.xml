@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#515151"
+    android:background="@drawable/quiz_screen_background"
     tools:context=".bottomNavFragments.QuizFragment">
 
 
@@ -106,7 +106,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
+        android:width="200dp"
         android:text="SAVE THE WORD"
+        android:background="@drawable/sign_button_custom"
+        android:backgroundTint="@color/white"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,9 +124,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="48dp"
-        android:background="@drawable/text_background"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/sign_button_custom"
         android:text="AYVA"
-        android:textColor="#E4FB00"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/saveWord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

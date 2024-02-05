@@ -2,7 +2,6 @@ package com.tahayasindogukan.quizapp.viewmodel
 
 
 import androidx.lifecycle.ViewModel
-import com.tahayasindogukan.quizapp.entity.Word
 
 
 class WordViewModel():ViewModel() {
@@ -22,94 +21,94 @@ class WordViewModel():ViewModel() {
 
 
 
-    fun getQuestionsList(i:Int):List<Word>{
+   /* fun getQuestionsList(i:Int):List<QuestionWords>{
         when(i){
             1->{
-                return listOf<Word>(
-                    Word("Apple",
+                return listOf<QuestionWords>(
+                    QuestionWords("Apple",
                         "Elma",
                         "Armut",
                         "Kiraz"),
 
-                    Word("Home",
+                    QuestionWords("Home",
                         "Ev",
                         "Otel",
                         "Araba"),
 
-                    Word("Mouth",
+                    QuestionWords("Mouth",
                         "Ağız",
                         "Yanak",
                         "El"),
 
-                    Word("Door",
+                    QuestionWords("Door",
                         "Kapı",
                         "Pencere",
                         "Mutfak"),
 
-                    Word("Kitchen",
+                    QuestionWords("Kitchen",
                         "Mutfak",
                         "Salon",
                         "Banyo"))
             }
             2->{
-               return listOf<Word>(
+               return listOf<QuestionWords>(
 
-                    Word("Brave",
+                    QuestionWords("Brave",
                         "Cesur",
                         "Huysuz",
                         "Mutsuz"),
 
-                    Word("Smile",
+                    QuestionWords("Smile",
                         "Gülümseme",
                         "Ağlama",
                         "Bakmak"),
 
-                    Word("Journey",
+                    QuestionWords("Journey",
                         "Yolculuk",
                         "Uyku",
                         "Kitap"),
 
-                    Word("Song",
+                    QuestionWords("Song",
                         "Şarkı",
                         "Bulut",
                         "Göz"),
 
-                    Word("Cloud",
+                    QuestionWords("Cloud",
                         "Bulut",
                         "Güneş",
                         "Ay"))
 
             }
             3->{
-              return  listOf<Word>(
+              return  listOf<QuestionWords>(
 
-                    Word("Pernicious",
+                    QuestionWords("Pernicious",
                         "Zararlı,Kötü Etkili",
                         "Kullanışlı",
                         "Bencil"),
 
-                    Word("Voracious",
+                    QuestionWords("Voracious",
                         "Aşırı Doymaz",
                         "Kısa Ömürlü",
                         "Gürültü"),
 
-                    Word("Cacophony",
+                    QuestionWords("Cacophony",
                         "Gürültü",
                         "Çaba,Gayret",
                         "Sevimsiz"),
 
-                    Word("Alleviate",
+                    QuestionWords("Alleviate",
                         "Hafifletmek",
                         "Abartmak",
                         "Bayılmak"),
 
-                    Word("Melancholy",
+                    QuestionWords("Melancholy",
                         "Hüzün",
                         "Sevinç",
                         "Merak"))
             }
         }
         return emptyList()
-    }
+    }*/
 
 }
