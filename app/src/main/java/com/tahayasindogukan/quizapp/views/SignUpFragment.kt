@@ -37,10 +37,12 @@ class SignUpFragment : Fragment() {
 
         binding.signUpButton.setOnClickListener {
             val email = binding.editEmailSignUp.text.toString()
-            val password = binding.editPasswordSignUp.text.toString()
+            val password = binding.editTextPassword.text.toString()
+            val name =binding.editTextName.text.toString()
+            val surname = binding.editTextSurname.text.toString()
 
-            viewModel.signUpViewModel(email, password) { success, message ->
-                if (email.isNotEmpty() && password.isNotEmpty()) {
+            viewModel.signUpViewModel(email, password,name,surname,0,0) { success, message ->
+                if (email.isNotEmpty() && password.isNotEmpty()&&name.isNotEmpty()&&surname.isNotEmpty()) {
                     navController.navigate(R.id.action_signUpFragment_to_signInFragment)
                 }
             }

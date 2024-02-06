@@ -1,6 +1,8 @@
 package com.tahayasindogukan.quizapp.repository
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
+import com.google.android.material.color.utilities.Score
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,18 +13,49 @@ class AuthRepository {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    fun signUpRepository(email: String, password: String, onComplete: (Boolean, String?) -> Unit) {
+
+    fun signUpRepository(
+        email: String,
+        password: String,
+        name:String,
+        surname:String,
+        correctQuestionCount:Int,
+        wrongQuestionCount:Int,
+        onComplete: (Boolean, String?) -> Unit) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    // Kayıt başarılı
                     val user = task.result?.user
+                    val uid = user?.uid
+                    // Firestore'a veri ekleme
+                    val db = FirebaseFirestore.getInstance()
+                    val userRef = db.collection("users").document(uid!!)
+                    val userMap = mutableMapOf<String, Any>()
+                    userMap["name"] = name
+                    userMap["surname"] = surname
+                    userMap["email"] = email
+                    userMap["score"] = 0
+                    userMap["correctQuestionCount"] = correctQuestionCount
+                    userMap["wrongQuestionCount"] = wrongQuestionCount
+
                     onComplete(true, user?.uid)
 
+                    userRef.set(userMap)
+                        .addOnSuccessListener {
+                            // Veri ekleme başarılı
+                            Log.e("Auth Repo","Kayıt Başarılı")
+                        }.addOnFailureListener{
+                            // Veri ekleme başarısız
+                            Log.e("Auth Repo","Kayıt Başarısız")
+                        }
                 } else {
                     onComplete(false, task.exception?.message)
                 }
             }
     }
+
+
 
     fun signInRepository(email: String, password: String, onComplete: (Boolean, String?) -> Unit){
         auth.signInWithEmailAndPassword(email, password)

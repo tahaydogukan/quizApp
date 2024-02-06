@@ -14,6 +14,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="14dp"
         android:background="@drawable/edit_bg"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -22,18 +23,17 @@
         android:padding="10dp"
         android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editPasswordSignIn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="369dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editPasswordSignIn"
         android:layout_width="360dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="14dp"
         android:background="@drawable/edit_bg"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -42,24 +42,22 @@
         android:padding="10dp"
         android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/signInButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailSignIn" />
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/signInButton"
-        android:layout_width="260dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="14dp"
-        android:backgroundTint="@color/white"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/sign_button_custom"
+        android:backgroundTint="@color/white"
         android:text="SIGN IN"
         app:layout_constraintBottom_toTopOf="@+id/signInText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/signInText"
@@ -79,7 +77,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:text="WELCOME"
-
         android:textColor="@color/white"
         android:textSize="48sp"
         android:textStyle="bold"

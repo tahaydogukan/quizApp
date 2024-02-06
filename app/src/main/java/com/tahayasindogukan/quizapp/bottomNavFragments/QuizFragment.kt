@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import com.tahayasindogukan.quizapp.databinding.FragmentQuizBinding
 import com.tahayasindogukan.quizapp.entity.QuestionWord
 import com.tahayasindogukan.quizapp.entity.SavedWords
+import com.tahayasindogukan.quizapp.viewmodel.AuthViewModel
 import com.tahayasindogukan.quizapp.viewmodel.QuestionWordsViewModel
 import com.tahayasindogukan.quizapp.viewmodel.SavedWordsViewModel
 import kotlin.random.Random
@@ -20,6 +21,7 @@ class QuizFragment : Fragment() {
     private lateinit var binding: FragmentQuizBinding
     private lateinit var questionWordsViewModel: QuestionWordsViewModel
     private lateinit var savedWordViewModel: SavedWordsViewModel
+    private val authViewModel: AuthViewModel by viewModels()
 
     var indeks:Int?=null
     //var questionListIndeks:Int=1
@@ -40,8 +42,7 @@ class QuizFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentQuizBinding.inflate(inflater, container, false)
 
         questionWordsViewModel.getQuestion()
@@ -54,11 +55,13 @@ class QuizFragment : Fragment() {
         binding.saveWord.setOnClickListener {
             insertDataToDatabase()
         }
-        //uploadQuestions(questionWordsList)
 
-        //var a =questionWordsViewModel.question
-        //Log.e("fragment",a.toString())
-        //updateQuestionList(1)
+        authViewModel.getUserData()
+        authViewModel.user.observe(viewLifecycleOwner){ data->
+            binding.apply {
+            quizQuestionsCount.text="${data.score}"
+            }
+        }
 
 
         /* binding.apply {
@@ -147,10 +150,11 @@ class QuizFragment : Fragment() {
         val userAnswer = button.text.toString()
         if (userAnswer == correctTranslation) {
             showToast("Doğru! Tebrikler.")
+            authViewModel.increaseScore(1)
 
         } else {
             showToast("Yanlış. Doğru cevap: $correctTranslation")
-
+            authViewModel.decreaseScore(1)
         }
         questionWordsViewModel.getQuestion()
         //uploadQuestions(questionWordsList)
