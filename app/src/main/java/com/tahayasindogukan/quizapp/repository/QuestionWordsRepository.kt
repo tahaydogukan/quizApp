@@ -19,4 +19,19 @@ class QuestionWordsRepository {
             return@withContext qwDao.getQuestionWords()
 
         }
+
+    suspend fun uploadQuestionWordsMedium() : ApiResponse =
+        withContext(Dispatchers.IO){
+            return@withContext qwDao.getQuestionWordsMedium()
+
+        }
+
+    suspend fun uploadQuestionWordsHard() : ApiResponse =
+        withContext(Dispatchers.IO){
+            return@withContext qwDao.getQuestionWordsHard()
+
+        }
+
+
+
 }

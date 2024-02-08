@@ -65,7 +65,7 @@ class AuthViewModel():ViewModel() {
                 onComplete(success, message)
         }
     }
-    fun increaseScore(score: Long) {
+    fun updateScore(score: Long) {
         // Firestore'da kullanıcı puanını güncelle
         val db = FirebaseFirestore.getInstance()
         val userRef = db.collection("users").document(currentUserViewModel()?.uid!!)
@@ -81,7 +81,23 @@ class AuthViewModel():ViewModel() {
         userRef.update("score",FieldValue.increment(-score))
 
     }
-    
+
+    fun updateWrongQuestionCount(score: Long) {
+        // Firestore'da kullanıcı puanını güncelle
+        val db = FirebaseFirestore.getInstance()
+        val userRef = db.collection("users").document(currentUserViewModel()?.uid!!)
+
+        userRef.update("wrongQuestionCount",FieldValue.increment(-score))
+
+    }
+    fun updateCorrectQuestionCount(score: Long) {
+        // Firestore'da kullanıcı puanını güncelle
+        val db = FirebaseFirestore.getInstance()
+        val userRef = db.collection("users").document(currentUserViewModel()?.uid!!)
+
+        userRef.update("correctQuestionCount",FieldValue.increment(-score))
+
+    }
     fun currentUserViewModel():FirebaseUser?{
         return auth.getCurrentUserRepository()
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_green"
+    android:background="@drawable/splash_screen_background"
     tools:context=".bottomNavFragments.SavedWordsFragment">
 
     <androidx.recyclerview.widget.RecyclerView

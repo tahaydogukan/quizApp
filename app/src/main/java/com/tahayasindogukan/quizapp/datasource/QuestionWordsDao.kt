@@ -10,6 +10,12 @@ interface QuestionWordsDao {
     @GET("question")
     suspend fun getQuestionWords() : ApiResponse
 
+    @GET("question2")
+    suspend fun getQuestionWordsMedium() : ApiResponse
+
+    @GET("question3")
+    suspend fun getQuestionWordsHard() : ApiResponse
+
 
 
 }

@@ -24,4 +24,18 @@ class QuestionWordsViewModel:ViewModel(){
         }
     }
 
+    fun getQuestionMedium(){
+        viewModelScope.launch(Dispatchers.Main){
+            question.value = qRepo.uploadQuestionWordsMedium().questionWordList
+            Log.e("viewmodel",question.toString())
+        }
+    }
+
+    fun getQuestionHard(){
+        viewModelScope.launch(Dispatchers.Main){
+            question.value = qRepo.uploadQuestionWordsHard().questionWordList
+            Log.e("viewmodel",question.toString())
+        }
+    }
+
 }

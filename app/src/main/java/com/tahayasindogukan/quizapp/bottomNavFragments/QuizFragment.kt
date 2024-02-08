@@ -24,10 +24,10 @@ class QuizFragment : Fragment() {
     private val authViewModel: AuthViewModel by viewModels()
 
     var indeks:Int?=null
-    //var questionListIndeks:Int=1
     var correctTranslation:String?=null
     var randomQuestionWord:QuestionWord?=null
     var questionWordsList:MutableList<QuestionWord> = mutableListOf()
+    var i:Int=1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,32 +61,24 @@ class QuizFragment : Fragment() {
             binding.apply {
             quizQuestionsCount.text="${data.score}"
             }
+            binding.apply {
+                easyButton.setOnClickListener{
+                    i=1
+                    questionWordsViewModel.getQuestion()
+
+                }
+                mediumButton.setOnClickListener{
+                    i=2
+                    questionWordsViewModel.getQuestionMedium()
+                }
+                hardButton.setOnClickListener{
+                    i=3
+                    questionWordsViewModel.getQuestionHard()
+                }
+            }
         }
-
-
-        /* binding.apply {
-
-            easyButton.setOnClickListener{
-                updtateQuestionList(1)
-            }
-            mediumButton.setOnClickListener{
-                updtateQuestionList(2)
-            }
-            hardButton.setOnClickListener{
-                updtateQuestionList(3)
-            }
-
-        binding.saveWord.setOnClickListener {
-            insertDataToDatabase()
-        }
-
-
-
-
-        }*/
         return binding.root
     }
-
 
   private fun insertDataToDatabase() {
 
@@ -105,30 +97,6 @@ class QuizFragment : Fragment() {
 
         }
     }
-    /*fun updateQuestionList(i: Int) {
-        when(i) {
-            1->{var wordList=wordViewModel.getQuestionsList(1)
-                uploadQuestions(wordList)
-            questionListIndeks=1}
-            2->{var wordList1=wordViewModel.getQuestionsList(2)
-                uploadQuestions(wordList1)
-                questionListIndeks=2}
-            3->{var wordList2=wordViewModel.getQuestionsList(3)
-                uploadQuestions(wordList2)
-                questionListIndeks=3}
-        }
-    }*/
-
-    fun getQuestion(){
-        questionWordsViewModel.getQuestion()
-        var question = questionWordsViewModel.question
-
-        //binding.textViewQuestion.text=question[1].englishWord.toString()
-
-        Log.e("fragment",question.toString())
-
-    }
-
     private fun uploadQuestions(questionWordsList: MutableList<QuestionWord>) {
         indeks = Random.nextInt(questionWordsList.size)
         randomQuestionWord = questionWordsList[indeks!!]
@@ -150,14 +118,17 @@ class QuizFragment : Fragment() {
         val userAnswer = button.text.toString()
         if (userAnswer == correctTranslation) {
             showToast("Doğru! Tebrikler.")
-            authViewModel.increaseScore(1)
-
+            authViewModel.updateScore(1)
         } else {
             showToast("Yanlış. Doğru cevap: $correctTranslation")
-            authViewModel.decreaseScore(1)
+            authViewModel.updateScore(-1)
         }
-        questionWordsViewModel.getQuestion()
-        //uploadQuestions(questionWordsList)
+        when(i){
+            1->questionWordsViewModel.getQuestion()
+                2->questionWordsViewModel.getQuestionMedium()
+                    3->questionWordsViewModel.getQuestionHard()
+
+        }
     }
      private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

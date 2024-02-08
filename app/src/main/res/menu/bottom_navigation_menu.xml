@@ -3,14 +3,14 @@
     <item
         android:id="@+id/quizFragment"
         android:icon="@drawable/bottom_navigation_question_image"
-        android:title="Quiz" />
+        android:title="Öğren" />
     <item
         android:id="@+id/savedWordsFragment"
         android:icon="@drawable/bottom_navigation_saved_words_image"
-        android:title="Saved Words" />
+        android:title="Kaydedilenler" />
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/bottom_navigation_settings_image"
-        android:title="Settings"
+        android:title="Profilim "
         />
 </menu>
