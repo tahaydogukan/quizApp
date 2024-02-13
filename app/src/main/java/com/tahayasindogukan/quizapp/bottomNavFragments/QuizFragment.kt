@@ -23,11 +23,11 @@ class QuizFragment : Fragment() {
     private lateinit var savedWordViewModel: SavedWordsViewModel
     private val authViewModel: AuthViewModel by viewModels()
 
-    var indeks:Int?=null
-    var correctTranslation:String?=null
-    var randomQuestionWord:QuestionWord?=null
-    var questionWordsList:MutableList<QuestionWord> = mutableListOf()
-    var i:Int=1
+    var indeks: Int? = null
+    var correctTranslation: String? = null
+    var randomQuestionWord: QuestionWord? = null
+    var questionWordsList: MutableList<QuestionWord> = mutableListOf()
+    var i: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,37 +42,36 @@ class QuizFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = FragmentQuizBinding.inflate(inflater, container, false)
 
         questionWordsViewModel.getQuestion()
 
-        questionWordsViewModel.question.observe(viewLifecycleOwner){data->
+        questionWordsViewModel.question.observe(viewLifecycleOwner) { data ->
             uploadQuestions(data as MutableList)
-            questionWordsList=data
+            questionWordsList = data
         }
-        Log.e("fragmentWordList",questionWordsList.toString())
+        Log.e("fragmentWordList", questionWordsList.toString())
         binding.saveWord.setOnClickListener {
             insertDataToDatabase()
         }
 
         authViewModel.getUserData()
-        authViewModel.user.observe(viewLifecycleOwner){ data->
+        authViewModel.user.observe(viewLifecycleOwner) { data ->
             binding.apply {
-            quizQuestionsCount.text="${data.score}"
-            }
-            binding.apply {
-                easyButton.setOnClickListener{
-                    i=1
+                quizQuestionsCount.text = "${data.score}"
+                easyButton.setOnClickListener {
+                    i = 1
                     questionWordsViewModel.getQuestion()
 
                 }
-                mediumButton.setOnClickListener{
-                    i=2
+                mediumButton.setOnClickListener {
+                    i = 2
                     questionWordsViewModel.getQuestionMedium()
                 }
-                hardButton.setOnClickListener{
-                    i=3
+                hardButton.setOnClickListener {
+                    i = 3
                     questionWordsViewModel.getQuestionHard()
                 }
             }
@@ -80,7 +79,7 @@ class QuizFragment : Fragment() {
         return binding.root
     }
 
-  private fun insertDataToDatabase() {
+    private fun insertDataToDatabase() {
 
         val english_word = randomQuestionWord?.englishWord
         val turkish_word = correctTranslation
@@ -97,6 +96,7 @@ class QuizFragment : Fragment() {
 
         }
     }
+
     private fun uploadQuestions(questionWordsList: MutableList<QuestionWord>) {
         indeks = Random.nextInt(questionWordsList.size)
         randomQuestionWord = questionWordsList[indeks!!]
@@ -111,26 +111,37 @@ class QuizFragment : Fragment() {
         buttonOptions[2].text = questionWordsList.random().turkishWord  // Rastgele yanlış cevap
 
         buttonOptions.forEach { button ->
-            button.setOnClickListener { checkAnswer(button, randomQuestionWord!!.turkishWord) }
+            button.setOnClickListener {
+                checkAnswer(button, randomQuestionWord!!.turkishWord)
+                authViewModel.scoree.observe(viewLifecycleOwner) {
+                    it.toString()
+                    Log.e(it.toString(), "nedir")
+                    binding.quizQuestionsCount.text = it.toString()
+                }
+            }
         }
     }
-    private fun checkAnswer(button: Button, correctTranslation:String) {
+
+    private fun checkAnswer(button: Button, correctTranslation: String) {
         val userAnswer = button.text.toString()
         if (userAnswer == correctTranslation) {
             showToast("Doğru! Tebrikler.")
-            authViewModel.updateScore(1)
+            authViewModel.updateScore(randomQuestionWord?.scoreOfWord!!.toLong())
+            authViewModel.updateCorrectQuestionCount()
         } else {
             showToast("Yanlış. Doğru cevap: $correctTranslation")
-            authViewModel.updateScore(-1)
+            authViewModel.updateScore(-randomQuestionWord?.scoreOfWord!!.toLong())
+            authViewModel.updateWrongQuestionCount()
         }
-        when(i){
-            1->questionWordsViewModel.getQuestion()
-                2->questionWordsViewModel.getQuestionMedium()
-                    3->questionWordsViewModel.getQuestionHard()
+        when (i) {
+            1 -> questionWordsViewModel.getQuestion()
+            2 -> questionWordsViewModel.getQuestionMedium()
+            3 -> questionWordsViewModel.getQuestionHard()
 
         }
     }
-     private fun showToast(message: String) {
+
+    private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,18 +1,14 @@
 package com.tahayasindogukan.quizapp.repository
 
 import android.util.Log
-import com.google.android.gms.tasks.Task
-import com.google.android.material.color.utilities.Score
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.tahayasindogukan.quizapp.entity.User
 
 
 class AuthRepository {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
 
     fun signUpRepository(
         email: String,

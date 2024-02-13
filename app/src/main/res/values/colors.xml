@@ -10,7 +10,7 @@
     <color name="signUp_Background">#336699</color>
     <color name="red">#D50000</color>
     <color name="grey">#AAAAAA</color>
-    <color name="dark_grey">AAAAAA</color>
+    <color name="dark_grey">#AAAAAA</color>
     <color name="blue">#0091EA</color>
     <color name="home_fragments_background">#F3F3F3</color>
 </resources>

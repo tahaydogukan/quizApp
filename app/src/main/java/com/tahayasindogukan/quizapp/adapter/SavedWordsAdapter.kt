@@ -26,12 +26,12 @@ RecyclerView.Adapter<SavedWordsAdapter.SavedWordsViewHolder>() {
     }
     //holder sayesinde card tasarımına ulaşıyoruz
     override fun onBindViewHolder(holder: SavedWordsViewHolder, position: Int) {
-        val savedWords= savedWordsList[position]
-        val t=holder.view
+        val savedWords = savedWordsList[position]
+        val t = holder.view
         t.savedWordsEnglish.text = savedWords.english_word
         t.savedWordsTurkish.text = savedWords.turkish_word
-        t.savedWordsIndeks.text= (position+1).toString()
-        t.savedWordsDelete.setOnClickListener{
+        t.savedWordsIndeks.text = (position + 1).toString()
+        t.savedWordsDelete.setOnClickListener {
             wordInterface.delete(position)
         }
 

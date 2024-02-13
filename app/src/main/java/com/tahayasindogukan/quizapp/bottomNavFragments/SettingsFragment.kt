@@ -1,16 +1,15 @@
 package com.tahayasindogukan.quizapp.bottomNavFragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.tahayasindogukan.quizapp.R
-import com.tahayasindogukan.quizapp.databinding.FragmentQuizBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tahayasindogukan.quizapp.adapter.SettingsAdapter
 import com.tahayasindogukan.quizapp.databinding.FragmentSettingsBinding
 import com.tahayasindogukan.quizapp.viewmodel.AuthViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class SettingsFragment : Fragment() {
@@ -19,22 +18,40 @@ class SettingsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        binding.liderpanosuRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        authViewModel.getUsers().observe(viewLifecycleOwner) { users ->
+            val recyclerView = binding.liderpanosuRecyclerView
+            val adapter = SettingsAdapter(users)
+            recyclerView.adapter = adapter
+        }
+
         authViewModel.getUserData()
-        authViewModel.user.observe(viewLifecycleOwner){ data->
+        authViewModel.user.observe(viewLifecycleOwner) { data ->
             binding.apply {
-                SettingsName.text="${data.name} ${data.surname}"
-                SettingsScore.text=" Puan : ${data.score}"
-                SettingsCountTrue.text="  Doğru Sayısı : ${data.correctQuestionCount}"
-                SettingsCountWrong.text="  Yanlış Sayısı : ${data.wrongQuestionCount}"
+                settingsNameTextView.text = "${data.name} ${data.surname}"
+                SettingsScore.text = " Puan : ${data.score}"
+                SettingsCountTrue.text = "  Doğru Sayısı : ${data.correctQuestionCount}"
+                SettingsCountWrong.text = "  Yanlış Sayısı : ${data.wrongQuestionCount}"
             }
         }
 
+        /*     binding.SettingsLogOut.setOnClickListener {
+                  authViewModel.signOutViewModel { success ->
+                      startActivity(Intent(requireContext(), MainActivity::class.java))
+                  }
+              }*/
 
         return binding.root
     }

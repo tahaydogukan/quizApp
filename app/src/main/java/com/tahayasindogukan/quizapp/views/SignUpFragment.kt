@@ -1,17 +1,16 @@
 package com.tahayasindogukan.quizapp.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.tahayasindogukan.quizapp.R
 import com.tahayasindogukan.quizapp.databinding.FragmentSignUpBinding
 import com.tahayasindogukan.quizapp.viewmodel.AuthViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 class SignUpFragment : Fragment() {
 
@@ -38,11 +37,12 @@ class SignUpFragment : Fragment() {
         binding.signUpButton.setOnClickListener {
             val email = binding.editEmailSignUp.text.toString()
             val password = binding.editTextPassword.text.toString()
-            val name =binding.editTextName.text.toString()
+            val name = binding.editTextName.text.toString()
             val surname = binding.editTextSurname.text.toString()
 
-            viewModel.signUpViewModel(email, password,name,surname,0,0) { success, message ->
-                if (email.isNotEmpty() && password.isNotEmpty()&&name.isNotEmpty()&&surname.isNotEmpty()) {
+            viewModel.signUpViewModel(email, password, name, surname, 0, 0) { success, message ->
+                if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && surname.isNotEmpty()) {
+                    binding.signUpButton.isEnabled = true
                     navController.navigate(R.id.action_signUpFragment_to_signInFragment)
                 }
             }

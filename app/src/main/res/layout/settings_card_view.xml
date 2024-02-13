@@ -1,61 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/saved_words_cardview"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/grey">
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@drawable/settings_fragment_rw_custom"
+            android:paddingLeft="10dp"
+            android:paddingRight="2dp">
 
             <TextView
-                android:id="@+id/savedWordsEnglish"
+                android:id="@+id/rwName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
                 android:text="APPLE"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rwSiraNumarasi"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/savedWordsTurkish"
+                android:id="@+id/rwScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="112dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="100dp"
                 android:text="ELMA"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/savedWordsDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/delete_image" />
-
             <TextView
-                android:id="@+id/savedWordsIndeks"
+                android:id="@+id/rwSiraNumarasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
                 android:text="1"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
