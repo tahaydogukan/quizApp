@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 import com.tahayasindogukan.quizapp.R
 import com.tahayasindogukan.quizapp.activities.HomeActivity
 import com.tahayasindogukan.quizapp.databinding.FragmentSignInBinding
 import com.tahayasindogukan.quizapp.viewmodel.AuthViewModel
+
 
 class SignInFragment : Fragment() {
 
@@ -30,17 +32,27 @@ class SignInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController= Navigation.findNavController(view)
+        navController = Navigation.findNavController(view)
 
-        binding.signInText.setOnClickListener{
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) {
+            startActivity(Intent(requireContext(), HomeActivity::class.java))
+        } else {
+
+        }
+
+
+
+        binding.signInText.setOnClickListener {
             navController.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
-        binding.signInButton.setOnClickListener{
-            val email=binding.editEmailSignIn.text.toString()
-            val password=binding.editPasswordSignIn.text.toString()
+        binding.signInButton.setOnClickListener {
+            val email = binding.editEmailSignIn.text.toString()
+            val password = binding.editPasswordSignIn.text.toString()
 
-            viewModel.signInViewModel(email,password){ success, message ->
+            viewModel.signInViewModel(email, password) { success, message ->
 
                 if (success) {
                     // Giriş başarılı, ek işlemleri yapabilirsiniz.

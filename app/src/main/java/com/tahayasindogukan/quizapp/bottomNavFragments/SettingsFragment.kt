@@ -1,5 +1,6 @@
 package com.tahayasindogukan.quizapp.bottomNavFragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tahayasindogukan.quizapp.activities.MainActivity
 import com.tahayasindogukan.quizapp.adapter.SettingsAdapter
 import com.tahayasindogukan.quizapp.databinding.FragmentSettingsBinding
 import com.tahayasindogukan.quizapp.viewmodel.AuthViewModel
@@ -47,11 +49,12 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        /*     binding.SettingsLogOut.setOnClickListener {
-                  authViewModel.signOutViewModel { success ->
-                      startActivity(Intent(requireContext(), MainActivity::class.java))
-                  }
-              }*/
+        binding.settingsLogoutBtn.setOnClickListener {
+            authViewModel.signOutViewModel { success ->
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+
+            }
+        }
 
         return binding.root
     }
